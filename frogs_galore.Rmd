@@ -48,3 +48,4 @@ points(myspecies_dat[ , c("decimalLongitude", "decimalLatitude")], pch = 20, cex
 ```
 print("crickets>frogs")
 
+print('distribution")
