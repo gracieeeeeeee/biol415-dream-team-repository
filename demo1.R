@@ -6,7 +6,7 @@ print(Brady)
 
 summy<-"it is sunny"
 
-myspecies <- c("Danaus plexippus")
+myspecies <- c("Gryllus veletis")
 
 # download GBIF occurrence data for this species; this takes time if there are many data points!
 gbif_dt <- occ_data(scientificName = myspecies, hasCoordinate = TRUE, limit = 1000)
