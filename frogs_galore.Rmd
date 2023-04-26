@@ -46,4 +46,5 @@ map("world", xlim = range(myspecies_dat$decimalLongitude), ylim = range(myspecie
 points(myspecies_dat[ , c("decimalLongitude", "decimalLatitude")], pch = 20, cex = 1, col = "red3")
 
 ```
+print("crickets>frogs")
 
