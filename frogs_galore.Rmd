@@ -1,0 +1,49 @@
+---
+title: "Ericland"
+author: "Brady Parlato"
+date: "2023-04-26"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+install.packages("remotes")
+library(remotes)
+remotes::install_github("ropensci/scrubr")
+
+library(rgbif)  #for downloading data from gbif
+library(scrubr) # for cleaning occurrence records based on spatial coordinates
+library(maps)   #for visualising occurrence records on maps based on spatial coordinates
+library(geodata)
+library(terra)
+library(maps)
+myspecies <- c("Rana temporaria")
+
+# download GBIF occurrence data for this species; this takes time if there are many data points!
+gbif_dt <- occ_data(scientificName = myspecies, hasCoordinate = TRUE, limit = 1000)
+
+# take a look at the downloaded data:
+gbif_dt
+head(gbif_dt)
+
+# check how the data are organized:
+names(gbif_dt)
+names(gbif_dt$meta)
+names(gbif_dt$data)
+
+# get the columns that matter for mapping and cleaning the occurrence data:
+myspecies_dat <- gbif_dt$data[ , c("decimalLongitude", "decimalLatitude", "individualCount", 
+                                   "occurrenceStatus", "coordinateUncertaintyInMeters", "institutionCode", "references")]
+head(myspecies_dat)
+
+# map the occurrence data:
+map("world", xlim = range(myspecies_dat$decimalLongitude), ylim = range(myspecies_dat$decimalLatitude))  
+points(myspecies_dat[ , c("decimalLongitude", "decimalLatitude")], pch = 20, cex = 1, col = "red3")
+
+```
+
